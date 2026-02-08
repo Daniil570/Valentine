@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<title>Мяу-Валентинка 💖</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    height: 100vh;
+    font-family: "Segoe UI", sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    background: linear-gradient(135deg, #ff9a9e, #fad0c4, #fbc2eb, #a6c1ee);
+    background-size: 400% 400%;
+    animation: gradientMove 12s ease infinite;
+}
+
+@keyframes gradientMove {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* Карточка */
+.card {
+    width: 92%;
+    max-width: 420px;
+    background: rgba(255,255,255,0.95);
+    border-radius: 30px;
+    padding: 28px 22px;
+    text-align: center;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.25);
+    position: relative;
+    animation: float 5s ease-in-out infinite;
+}
+
+@keyframes float {
+    0% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+    100% { transform: translateY(0); }
+}
+
+h1 {
+    margin: 10px 0;
+    font-size: clamp(24px, 5vw, 34px);
+    background: linear-gradient(45deg, #ff4d6d, #ff9a9e);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+p {
+    margin: 6px 0;
+    font-size: clamp(16px, 4vw, 20px);
+    color: #555;
+}
+
+/* Котики */
+.cats {
+    font-size: 38px;
+    animation: bounce 2s infinite;
+}
+
+@keyframes bounce {
+    0%,100% { transform: translateY(0); }
+    50% { transform: translateY(-6px); }
+}
+
+/* Сердце */
+.heart {
+    font-size: 46px;
+    animation: pulse 1.2s infinite;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.25); }
+    100% { transform: scale(1); }
+}
+
+/* Кнопка */
+button {
+    margin-top: 15px;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 18px;
+    font-size: 16px;
+    cursor: pointer;
+    color: white;
+    background: linear-gradient(45deg, #ff4d6d, #ff9a9e);
+    box-shadow: 0 6px 15px rgba(255,77,109,0.4);
+    transition: 0.3s;
+}
+
+button:hover {
+    transform: scale(1.07);
+}
+
+/* Падающие элементы */
+.falling {
+    position: fixed;
+    top: -20px;
+    pointer-events: none;
+    animation: fall linear forwards;
+}
+
+@keyframes fall {
+    to {
+        transform: translateY(110vh) rotate(360deg);
+        opacity: 0;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="card">
+    <div class="cats">🐱💕🐱</div>
+    <div class="heart">💖</div>
+    <h1>С Днём Святого Валентина!</h1>
+    <p>Ты делаешь мой мир ярче и теплее ☀️</p>
+    <p>Пусть счастье будет рядом с тобой 🐾</p>
+    <button onclick="megaLove()">Больше любви 💘</button>
+</div>
+
+<script>
+const items = ["💖","💗","💘","🐱","💕","✨"];
+
+function createFalling() {
+    const el = document.createElement("div");
+    el.className = "falling";
+    el.innerText = items[Math.floor(Math.random() * items.length)];
+    el.style.left = Math.random() * 100 + "vw";
+    el.style.fontSize = (18 + Math.random() * 28) + "px";
+    el.style.animationDuration = (3 + Math.random() * 3) + "s";
+    document.body.appendChild(el);
+    setTimeout(() => el.remove(), 6000);
+}
+
+setInterval(createFalling, 350);
+
+function megaLove() {
+    for (let i = 0; i < 25; i++) {
+        setTimeout(createFalling, i * 70);
+    }
+}
+</script>
+
+</body>
+</html>
